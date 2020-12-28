@@ -13,7 +13,7 @@ fun main(args: Array<String>) {
     do {
         input = menu()
         when(input) {
-            1 -> println("You Chose Add Placemark")
+            1 -> addPlacemark()
             2 -> println("You Chose Update Placemark")
             3 -> println("You Chose List All Placemarks")
             -1 -> println("Exiting App")
@@ -42,4 +42,16 @@ fun menu() : Int {
     else
         -9
     return option
+}
+fun addPlacemark(){
+    var title : String
+    var description : String
+    println("Add Placemark")
+    println()
+    print("Enter a Title : ")
+    title = readLine()!!
+    println("You entered $title for title")
+    print("Enter a Description : ")
+    description = readLine()!!
+    println("You entered $description as a description")
 }
