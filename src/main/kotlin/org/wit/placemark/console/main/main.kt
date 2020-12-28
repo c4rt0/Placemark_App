@@ -1,4 +1,4 @@
-package org.wit.placemark
+package org.wit.placemark.console.main
 
 import mu.KotlinLogging
 
@@ -14,6 +14,8 @@ fun main(args: Array<String>) {
         input = menu()
         when(input) {
             1 -> println("You Chose Add Placemark")
+            2 -> println("You Chose Update Placemark")
+            3 -> println("You Chose List All Placemarks")
             -1 -> println("Exiting App")
             else -> println("Invalid Option")
         }
