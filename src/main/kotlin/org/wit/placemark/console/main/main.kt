@@ -4,9 +4,9 @@ import mu.KotlinLogging
 import org.wit.placemark.console.models.PlacemarkModel
 
 private val logger = KotlinLogging.logger {}
-val placemarks = ArrayList<PlacemarkModel>()
 
 var placemark = PlacemarkModel()
+val placemarks = ArrayList<PlacemarkModel>()
 
 fun main(args: Array<String>) {
     logger.info { "Launching Placemark Console App" }
@@ -55,18 +55,24 @@ fun addPlacemark(){
     placemark.title = readLine()!!
     print("Enter a Description : ")
     placemark.description = readLine()!!
-    println("You entered [ placemark.title ] for title and [ placemark.description ] for description")
-    placemarks.add(placemark.copy())
+
+    if (placemark.title.isNotEmpty() && placemark.description.isNotEmpty()) {
+        placemarks.add(placemark.copy())
+        logger.info("Placemark Added : [ $placemark ]")
+    }
+    else
+        logger.info("Placemark Not Added")
 }
 
 fun updatePlacemark() {
     println("Update Placemark")
     println()
-    print("Enter a new Title for [ "+ placemark.title + "] : ")
+    print("Enter a new Title for [ " + placemark.title + " ] : ")
     placemark.title = readLine()!!
-    print("Enter a new Description for [" + placemark.description + " ] : ")
+    print("Enter a new Description for [ " + placemark.description + " ] : ")
     placemark.description = readLine()!!
-    println("You updated [ " + placemark.title + "] for title and [ " + placemark.description + "] for description")
+    println("You updated [ " + placemark.title + " ] for title " +
+            "and [ " + placemark.description + " ] for description")
 }
 
 fun listPlacemarks() {
