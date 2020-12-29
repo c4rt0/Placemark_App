@@ -4,9 +4,7 @@ import mu.KotlinLogging
 import org.wit.placemark.console.models.PlacemarkModel
 
 private val logger = KotlinLogging.logger {}
-
-//var title = ""
-//var description = ""
+val placemarks = ArrayList<PlacemarkModel>()
 
 var placemark = PlacemarkModel()
 
@@ -51,7 +49,6 @@ fun menu() : Int {
 }
 
 fun addPlacemark(){
-
     println("Add Placemark")
     println()
     print("Enter a Title : ")
@@ -59,6 +56,7 @@ fun addPlacemark(){
     print("Enter a Description : ")
     placemark.description = readLine()!!
     println("You entered [ placemark.title ] for title and [ placemark.description ] for description")
+    placemarks.add(placemark.copy())
 }
 
 fun updatePlacemark() {
@@ -72,5 +70,7 @@ fun updatePlacemark() {
 }
 
 fun listPlacemarks() {
-    println("You Chose List All Placemarks")
+    println("List All Placemarks")
+    println()
+    placemarks.forEach { logger.info("${it}") }
 }
