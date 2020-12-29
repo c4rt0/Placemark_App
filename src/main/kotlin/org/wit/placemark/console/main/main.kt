@@ -43,7 +43,7 @@ fun menu() : Int {
     // println(" -99. Place dummy data in the array")   // This option is purposely hidden - developer's piece of mind :)
     println("-1. Exit")
     println()
-    print("Enter Option : ")
+    print("Enter Option : \n")
     input = readLine()!!
     option = if (input.toIntOrNull() != null && !input.isEmpty())
         input.toInt()
@@ -92,13 +92,20 @@ fun updatePlacemark() {
 
     if(aPlacemark != null) {
         print("Enter a new Title for [ " + aPlacemark.title + " ] : ")
-        aPlacemark.title = readLine()!!
+        var aPlacemark_title = readLine()!!
         print("Enter a new Description for [ " + aPlacemark.description + " ] : ")
-        aPlacemark.description = readLine()!!
-        println(
-            "You updated [ " + aPlacemark.title + " ] for title " +
-                    "and [ " + aPlacemark.description + " ] for description"
-        )
+        var aPlacemark_description = readLine()!!
+        if(aPlacemark_title.isNotEmpty() && aPlacemark_description.isNotEmpty()){
+            aPlacemark.title = aPlacemark_title
+            aPlacemark.description = aPlacemark_description
+            println(
+                "You updated [ " + aPlacemark.title + " ] for title " +
+                        "and [ " + aPlacemark.description + " ] for description"
+            )
+        }
+        else
+            println("Some of the values were empty - this entry was NOT updated.")
+            logger.info { "Invalid data rejected, placemark update cancelled" }
     }
     else
         println("Placemark Not Updated...")
