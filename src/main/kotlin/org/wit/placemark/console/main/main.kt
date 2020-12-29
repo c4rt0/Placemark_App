@@ -73,39 +73,30 @@ fun addPlacemark(){
 }
 
 fun updatePlacemark() {
-
-//    println("Update Placemark")
-//    println()
-//    var placemark = PlacemarkModel()
-//    print("Enter a new Title for [ " + placemark.title + " ] : ")
-//    placemark.title = readLine()!!
-//    print("Enter a new Description for [ " + placemark.description + " ] : ")
-//    placemark.description = readLine()!!
-//    println("You updated [ " + placemark.title + " ] for title " +
-//            "and [ " + placemark.description + " ] for description")
-
     println("Update Placemark")
     println()
     listPlacemarks()
     var searchId = getId()
     val aPlacemark = search(searchId)
+    var tempTitle : String?
+    var tempDescription : String?
 
     if(aPlacemark != null) {
         print("Enter a new Title for [ " + aPlacemark.title + " ] : ")
-        var aPlacemark_title = readLine()!!
+        tempTitle = readLine()!!
         print("Enter a new Description for [ " + aPlacemark.description + " ] : ")
-        var aPlacemark_description = readLine()!!
-        if(aPlacemark_title.isNotEmpty() && aPlacemark_description.isNotEmpty()){
-            aPlacemark.title = aPlacemark_title
-            aPlacemark.description = aPlacemark_description
+        tempDescription = readLine()!!
+
+        if (!tempTitle.isNullOrEmpty() && !tempDescription.isNullOrEmpty()) {
+            aPlacemark.title = tempTitle
+            aPlacemark.description = tempDescription
             println(
                 "You updated [ " + aPlacemark.title + " ] for title " +
-                        "and [ " + aPlacemark.description + " ] for description"
-            )
+                        "and [ " + aPlacemark.description + " ] for description")
+            logger.info("Placemark Updated : [ $aPlacemark ]")
         }
         else
-            println("Some of the values were empty - this entry was NOT updated.")
-            logger.info { "Invalid data rejected, placemark update cancelled" }
+            logger.info("Placemark Not Updated")
     }
     else
         println("Placemark Not Updated...")
