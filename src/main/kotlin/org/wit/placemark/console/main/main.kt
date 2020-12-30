@@ -1,12 +1,15 @@
 package org.wit.placemark.console.main
 
 import mu.KotlinLogging
+import org.wit.placemark.console.models.PlacemarkMemStore
 import org.wit.placemark.console.models.PlacemarkModel
 
 private val logger = KotlinLogging.logger {}
 
 //var placemark = PlacemarkModel()
-val placemarks = ArrayList<PlacemarkModel>()
+//val placemarks = ArrayList<PlacemarkModel>()
+
+val placemarks = PlacemarkMemStore()
 
 fun main(args: Array<String>) {
     logger.info { "Launching Placemark Console App" }
@@ -63,9 +66,9 @@ fun addPlacemark(){
     // Checking if there's no empty entries:
     if (aPlacemark.title.isNotEmpty() && aPlacemark.description.isNotEmpty()) {
         // adding +1 to id
-        aPlacemark.id = placemarks.size.toLong()
+//        aPlacemark.id = placemarks.size.toLong()
         aPlacemark.id++
-        placemarks.add(aPlacemark.copy())
+        placemarks.create(aPlacemark.copy())
         logger.info("Placemark Added : [ $aPlacemark ]")
     }
     else
@@ -106,14 +109,15 @@ fun updatePlacemark() {
 fun listPlacemarks() {
     println("List All Placemarks")
     println()
-    placemarks.forEach { logger.info("${it}") }
+//    placemarks.forEach { logger.info("${it}") }
+    placemarks.logAll()
     println()
 }
 
 fun searchPlacemark() {
     var searchId = getId()
     val aPlacemark = search(searchId)   // create Placemark object here and assign,
-    // based on 'searchId' value passed to 'search()'
+                                        // based on 'searchId' value passed to 'search()'
     if (aPlacemark != null)
         println("Placemark Details [ $aPlacemark ]")
     else
@@ -133,12 +137,12 @@ fun getId(): Long{
 }
 
 fun search(id: Long) : PlacemarkModel? {
-    var foundPlacemark: PlacemarkModel? = placemarks.find { p -> p.id == id }
+    var foundPlacemark: PlacemarkModel? = placemarks.findOne(id)
     return foundPlacemark
 }
 
 fun dummyData() {
-    placemarks.add(PlacemarkModel(1, "New York New York", "So Good They Named It Twice"))
-    placemarks.add(PlacemarkModel(2, "Ring of Kerry", "Some place in the Kingdom"))
-    placemarks.add(PlacemarkModel(3, "Waterford City", "You get great Blaas Here!!"))
+    placemarks.create(PlacemarkModel(1, "New York New York", "So Good They Named It Twice"))
+    placemarks.create(PlacemarkModel(2, "Ring of Kerry", "Some place in the Kingdom"))
+    placemarks.create(PlacemarkModel(3, "Waterford City", "You get great Blaas Here!!"))
 }
