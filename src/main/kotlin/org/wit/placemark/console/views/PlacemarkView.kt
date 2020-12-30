@@ -1,7 +1,5 @@
 package org.wit.placemark.console.views
 
-import org.wit.placemark.console.main.placemarkView
-import org.wit.placemark.console.main.placemarks
 import org.wit.placemark.console.models.PlacemarkMemStore
 import org.wit.placemark.console.models.PlacemarkModel
 
