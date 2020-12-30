@@ -1,6 +1,7 @@
 package org.wit.placemark.console.main
 
 import mu.KotlinLogging
+import org.wit.placemark.console.controllers.PlacemarkController
 import org.wit.placemark.console.models.PlacemarkMemStore
 import org.wit.placemark.console.models.PlacemarkModel
 import org.wit.placemark.console.views.PlacemarkView
@@ -9,6 +10,7 @@ private val logger = KotlinLogging.logger {}
 
 val placemarks = PlacemarkMemStore()
 val placemarkView = PlacemarkView()
+val controller = PlacemarkController()
 
 fun main(args: Array<String>) {
     logger.info { "Launching Placemark Console App" }
@@ -17,13 +19,13 @@ fun main(args: Array<String>) {
     var input: Int
 
     do {
-        input = placemarkView.menu()
+        input = controller.menu()
         when(input) {
-            1 -> addPlacemark()
-            2 -> updatePlacemark()
-            3 -> placemarkView.listPlacemarks(placemarks)
-            4 -> searchPlacemark()
-            -99 -> dummyData()
+            1 -> controller.add()
+            2 -> controller.update()
+            3 -> controller.list()
+            4 -> controller.search()
+            -99 -> controller.dummyData()
             -1 -> println("Exiting App")
             else -> println("Invalid Option")
         }
